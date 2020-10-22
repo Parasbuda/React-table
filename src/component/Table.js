@@ -15,6 +15,7 @@ const Table = () => {
     getTableProps,
     getTableBodyProps,
     headerGroups,
+    footerGroups,
     rows,
     prepareRow,
   } = tableInstance;
@@ -47,6 +48,23 @@ const Table = () => {
           );
         })}
       </tbody>
+      <tfoot>
+        {
+          footerGroups.map(footerGroup=>{
+            return(
+              <tr {...footerGroup.getFooterGroupProps()}>
+                {
+                  footerGroup.headers.map(column=>{
+                    return(
+                      <td {...column.getFooterProps()}>{column.render('Footer')}</td>
+                    )
+                  })
+                }
+              </tr>
+            )
+          })
+        }
+      </tfoot>
     </table>
   );
 };
